@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Task;
-import models.validators.MessageValidator;
+import models.validators.TaskValidator;
 import utils.DBUtil;
 
 /**
@@ -54,7 +54,7 @@ public class UpdateServlet extends HttpServlet {
             m.setUpdated_at(currentTime);       // 更新日時のみ上書き
 
             // バリデーションを実行してエラーがあったら編集画面のフォームに戻る
-            List<String> errors = MessageValidator.validate(m);
+            List<String> errors = TaskValidator.validate(m);
             if(errors.size() > 0) {
                 em.close();
 
