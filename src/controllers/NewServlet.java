@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Task;
 
-/**
- * Servlet implementation class NewServlet
- */
+// 作成ページのサーブレットクラス
 @WebServlet("/new")
 public class NewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -34,8 +32,9 @@ public class NewServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
 
         // おまじないとしてのインスタンスを生成
-        request.setAttribute("message", new Task());
+        request.setAttribute("task", new Task());
 
+        // newのビューを表示する
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/new.jsp");
         rd.forward(request, response);
      }
