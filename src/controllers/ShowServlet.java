@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Task;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class ShowServlet
- */
+// showページのサーブレットクラス
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
@@ -28,21 +26,20 @@ public class ShowServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-        /**
-         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-         */
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            EntityManager em = DBUtil.createEntityManager();
+    // get処理メソッド
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EntityManager em = DBUtil.createEntityManager();
 
-            // 該当のIDのメッセージ1件のみをデータベースから取得
-            Task m = em.find(Task.class, Integer.parseInt(request.getParameter("id")));
+        // 該当のIDのメッセージ1件のみをデータベースから取得
+        Task t = em.find(Task.class, Integer.parseInt(request.getParameter("id")));
 
-            em.close();
+        em.close();
 
-            // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
-            request.setAttribute("message", m);
+        // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
+        request.setAttribute("task", t);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/show.jsp");
-            rd.forward(request, response);
-        }
+        // showのビューを表示する
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
+        rd.forward(request, response);
+    }
 }

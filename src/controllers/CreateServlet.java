@@ -29,9 +29,7 @@ public class CreateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
+    // get処理メソッド
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String _token = request.getParameter("_token");
@@ -58,6 +56,7 @@ public class CreateServlet extends HttpServlet {
                 request.setAttribute("task", t);
                 request.setAttribute("errors", errors);
 
+                // newのビューを表示する
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
                 rd.forward(request, response);
             }
